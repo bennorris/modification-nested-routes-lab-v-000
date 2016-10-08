@@ -1,2 +1,12 @@
 <h1>Editing <%= @song.title %></h1>
-<%= render partial: "form" %>
+
+<%=form_for(@song) do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %><br>
+<%= f.label 'Artists' if !@artists.nil? %>
+<%= f.select('artist_id', options_from_collection_for_select(@artists, 'id', 'name')) if !@artists.nil? %>
+<%= f.label 'Artist' if !@artist.nil? %>
+<%= f.text_field :artist_name, value: @artist.name if !@artist.nil? %>
+<%= f.hidden_field :artist_id %>
+<%= f.submit "Edit Song" %>
+<% end %>
